@@ -1,7 +1,7 @@
 package app6.src.ast;
 
 /**
- * Classe representant une feuille d'AST
+ * Classe représentant une feuille d'AST
  */
 public class FeuilleAST extends ElemAST {
 
@@ -11,26 +11,25 @@ public class FeuilleAST extends ElemAST {
     /**
      * Constructeur pour l'initialisation d'attribut(s)
      */
-    public FeuilleAST() {  // avec arguments
-        //
-        return;
+    public FeuilleAST() {
+        // TODO
     }
 
 
     /**
-     * Evaluation de feuille d'AST
+     * Évaluation de feuille d'AST
      */
     public int EvalAST() {
-        //
+        // TODO
         return 0;
     }
 
 
     /**
-     * Lecture de chaine de caracteres correspondant a la feuille d'AST
+     * Lecture de chaine de caractères correspondant à la feuille d'AST
      */
     public String LectAST() {
-        //
+        // TODO
         return "";
     }
 

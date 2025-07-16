@@ -1,25 +1,26 @@
 package app6.src.ast;
 
 /**
- * Classe representant une feuille d'AST
+ * Classe représentant une feuille d'AST
  */
 public class NoeudAST extends ElemAST {
 
     // Attributs
 
+
     /**
      * Constructeur pour l'initialisation d'attributs
      */
-    public NoeudAST() { // avec arguments
-        //
+    public NoeudAST() {
+        // TODO
     }
 
 
     /**
-     * Evaluation de noeud d'AST
+     * Évaluation de noeud d'AST
      */
     public int EvalAST() {
-        //
+        // TODO
         return 0;
     }
 
@@ -28,7 +29,7 @@ public class NoeudAST extends ElemAST {
      * Lecture de noeud d'AST
      */
     public String LectAST() {
-        //
+        // TODO
         return "";
     }
 
