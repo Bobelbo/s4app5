@@ -1,4 +1,4 @@
-package app6.src;
+package app6.src.lexical;
 
 import app6.src.filelib.Reader;
 import app6.src.filelib.Writer;

@@ -1,4 +1,4 @@
-package app6.src;
+package app6.src.lexical;
 
 /**
  * Cette classe identifie les terminaux reconnus et retournes par
