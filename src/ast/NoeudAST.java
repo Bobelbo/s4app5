@@ -1,6 +1,7 @@
 package app6.src.ast;
 
 import app6.src.lexical.Terminal;
+import app6.src.lexical.TerminalType;
 
 import static app6.src.lexical.Operateurs.*;
 
@@ -9,16 +10,13 @@ import static app6.src.lexical.Operateurs.*;
  */
 public class NoeudAST extends ElemAST {
 
-    // Attributs
-    public ElemAST gauche;    // Sous-arbre gauche
-    public ElemAST droite;    // Sous-arbre dro
-    private Terminal terminal; // Opérateur de l'AST
-
     /**
      * Constructeur pour l'initialisation d'attributs
+     *
+     * @param terminal
      */
     public NoeudAST(Terminal terminal) {
-        this.terminal = terminal;
+        super(terminal);
     }
 
     /**
@@ -57,6 +55,10 @@ public class NoeudAST extends ElemAST {
         }
     }
 
+    @Override
+    public TerminalType getType() {
+        return this.terminal.type;
+    }
 
     /**
      * Lecture de noeud d'AST
