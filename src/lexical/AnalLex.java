@@ -3,19 +3,21 @@ package app6.src.lexical;
 import app6.src.filelib.Reader;
 import app6.src.filelib.Writer;
 
+import static app6.src.lexical.Operateurs.OPERATEURS;
+
 /**
  * Cette classe effectue l'analyse lexicale
  */
 public class AnalLex {
 
     // Attributs
-    private final String formule;
+    private String formule;
 
     /**
      * Constructeur pour l'initialisation d'attribut(s)
      */
     public AnalLex(String formule) {
-        this.formule = formule;                                 // Initialisation de l'attribut formule
+        this.formule = formule.replace(" ", "");                           // Initialisation de l'attribut formule
     }
 
 
@@ -25,8 +27,7 @@ public class AnalLex {
      * true s'il reste encore au moins un terminal qui n'a pas été retourné
      */
     public boolean resteTerminal() {
-        // TODO
-        throw new UnsupportedOperationException("Not implemented yet");
+        return !formule.isEmpty();
     }
 
 
@@ -35,8 +36,30 @@ public class AnalLex {
      * Cette methode est une implémentation d'un AEF
      */
     public Terminal prochainTerminal() {
-        // TODO
-        throw new UnsupportedOperationException("Not implemented yet");
+        StringBuilder acc = new StringBuilder();
+
+        for (int i = 0; i < formule.length(); i++) {
+
+            char c = formule.charAt(i);
+
+            // Check si Terminal est unique operateur
+            if (OPERATEURS.contains(Character.toString(c))) {
+
+                if (!acc.isEmpty()) { // Si on a déjà accumulé des caractères
+                    formule = formule.substring(i); // On retire le terminal accumulé de la formule
+                } else {
+                    acc = new StringBuilder(Character.toString(c)); // On a trouvé un opérateur
+                    formule = formule.substring(i + 1); // On retire le terminal trouvé de la formule
+                }
+
+                return new Terminal(acc.toString()); // Retourne le terminal trouvé
+            }
+
+            acc.append(c);
+        }
+
+        ErreurLex("Fin de la formule atteinte sans trouver de terminal");
+        return null; // Ne devrait jamais arriver si la formule est correcte
     }
 
 
@@ -44,7 +67,8 @@ public class AnalLex {
      * ErreurLex() envoie un message d'erreur lexicale
      */
     public void ErreurLex(String s) {
-        // TODO
+        System.out.println("Erreur lexicale : " + s);
+        System.exit(1); // Arrêt du programme en cas d'erreur lexicale
     }
 
 
@@ -72,7 +96,7 @@ public class AnalLex {
         while (lexical.resteTerminal()) {
 
             t = lexical.prochainTerminal();
-            toWrite.append(t.chaine).append("\n");
+            toWrite.append(t.toString()).append("\n");
             // toWrite contient le resultat de l'analyse lexicale
         }
 
