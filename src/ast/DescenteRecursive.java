@@ -1,6 +1,5 @@
-package app6.src;
+package app6.src.ast;
 
-import app6.src.ast.ElemAST;
 import app6.src.filelib.Writer;
 
 /**
@@ -38,7 +37,8 @@ public class DescenteRecursive {
      * ErreurSynt() envoie un message d'erreur syntaxique
      */
     public void ErreurSynt(String s) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        System.out.println("Erreur syntaxique : " + s);
+        System.exit(1); // Arrêt du programme en cas d'erreur lexicale
     }
 
 
@@ -52,8 +52,8 @@ public class DescenteRecursive {
 
         if (args.length == 0) {
             args = new String[2];
-            args[0] = "ExpArith.txt";
-            args[1] = "ResultatSyntaxique.txt";
+            args[0] = "src/ExpArith.txt";
+            args[1] = "src/ResultatSyntaxique.txt";
         }
 
         DescenteRecursive dr = new DescenteRecursive(args[0]);
@@ -62,7 +62,7 @@ public class DescenteRecursive {
 
             ElemAST RacineAST = dr.AnalSynt();
 
-            toWriteLect += "Lecture de l'AST trouve : " + RacineAST.LectAST() + "\n";
+            toWriteLect += "Lecture de l'AST trouve : " + RacineAST.toString() + "\n";
             System.out.println(toWriteLect);
 
             toWriteEval += "Evaluation de l'AST trouve : " + RacineAST.EvalAST() + "\n";
