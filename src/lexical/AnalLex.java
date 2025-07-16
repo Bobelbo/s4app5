@@ -21,7 +21,7 @@ public class AnalLex {
 
     /**
      * resteTerminal() retourne :
-     * false si tous les terminaux de l'expression arithmetique ont été retournés
+     * false si tous les terminaux de l'expression arithmétique ont été retournés
      * true s'il reste encore au moins un terminal qui n'a pas été retourné
      */
     public boolean resteTerminal() {
@@ -32,7 +32,7 @@ public class AnalLex {
 
     /**
      * prochainTerminal() retourne le prochain terminal
-     * Cette methode est une implémentation d'un AEF
+     * Cette méthode est une implémentation d'un AEF
      */
     public Terminal prochainTerminal() {
         // TODO
@@ -76,8 +76,8 @@ public class AnalLex {
             // toWrite contient le resultat de l'analyse lexicale
         }
 
-        System.out.println(toWrite);                            // Ecriture de toWrite sur la console
-        Writer w = new Writer(args[1], toWrite.toString());     // Ecriture de toWrite dans fichier args[1]
+        System.out.println(toWrite);                            // Écriture de toWrite sur la console
+        Writer w = new Writer(args[1], toWrite.toString());     // Écriture de toWrite dans fichier args[1]
         System.out.println("Fin d'analyse lexicale");
     }
 }
