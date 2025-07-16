@@ -58,8 +58,8 @@ public class AnalLex {
             acc.append(c);
         }
 
-        ErreurLex("Fin de la formule atteinte sans trouver de terminal");
-        return null; // Ne devrait jamais arriver si la formule est correcte
+        formule = ""; // On retire le terminal accumulé de la formule
+        return new Terminal(acc.toString()); // Retourne le terminal trouvé
     }
 
 
@@ -81,8 +81,8 @@ public class AnalLex {
         if (args.length == 0) {
 
             args = new String[2];
-            args[0] = "ExpArith.txt";
-            args[1] = "ResultatLexical.txt";
+            args[0] = "src/ExpArith.txt";
+            args[1] = "src/ResultatLexical.txt";
 
         }
         Reader r = new Reader(args[0]);

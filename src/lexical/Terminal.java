@@ -43,6 +43,7 @@ public class Terminal {
                 } else if (chaine.matches("^[A-Z]([A-Za-z]|_(?!_|$))*$")) { // Vérifie si c'est une variable
                     this.type = TerminalType.VARIABLE;
                 } else {
+                    System.out.println("Terminal inconnu: " + chaine);
                     throw new IllegalArgumentException("Terminal inconnu: " + chaine);
                 }
                 break;
