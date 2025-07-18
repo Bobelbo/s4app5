@@ -5,6 +5,9 @@ import app6.src.filelib.Writer;
 import app6.src.lexical.AnalLex;
 import app6.src.lexical.Terminal;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static app6.src.lexical.TerminalType.*;
 
 /**
@@ -25,43 +28,36 @@ public class DescenteRecursive {
      * Elle retourne une référence sur la racine de l'AST construit
      */
     public ElemAST AnalSynt() {
-        ElemAST racine = null;
-        ElemAST prevOper = null; // Noeud actuel de l'AST
-        ElemAST prevVal = null;
+        ElemAST racine = null; // Racine de l'AST
+        List<SyntaxTreeBuilder> refRacinesParenthese = new ArrayList<>();
+        // 0 est le root builder
+        refRacinesParenthese.add(new SyntaxTreeBuilder());
+        int profondeurRacine = 0;
 
-        while(this.analexical.resteTerminal()) {
-            NoeudAST noeud = new NoeudAST(this.analexical.prochainTerminal()); // Création d'un nouveau noeud
+        try {
+            while (this.analexical.resteTerminal()) {
+                Terminal terminal = this.analexical.prochainTerminal(); // Récupération du prochain terminal
 
-            switch (noeud.getType()) {
-                case OPERATEUR:
-                    if (racine == null) {
-                        racine = noeud; // Création de la racine si elle n'existe pas
-                        racine.gauche = prevVal; // Le noeud de réserve devient le sous-arbre gauche de la racine
-                        prevVal = null; // Réinitialisation de la réserve
-                    } else {
-                        noeud.gauche = prevOper.droite;
-                        prevOper.droite = noeud; // Si le précédent est un opérateur, on ajoute le nouveau noeud comme sous-arbre droit
-                    }
-                    prevOper = noeud;
-                    break;
+                if (terminal.type == PARENTHESE_OUVRANTE) {
+                    profondeurRacine++;
+                    refRacinesParenthese.add(profondeurRacine, new SyntaxTreeBuilder());
+                } else if (terminal.type == PARENTHESE_FERMANTE) {
+                    profondeurRacine--;
+                    racine = refRacinesParenthese.get(profondeurRacine).buildTree(racine);
+                } else {
+                    racine = refRacinesParenthese.get(profondeurRacine).buildTree(new NoeudAST(terminal));
+                }
+            } // End of while
 
-                case NOMBRE, VARIABLE:
-                    if (racine != null) {
-                        if (prevOper.droite != null) {
-                            ErreurSynt("Sous-arbre droit déjà occupé pour l'opérateur : " + prevOper);
-                        }
-                        prevOper.droite = noeud; // Ajout du noeud comme sous-arbre droit de l'opérateur précédent
-                    }
-                    prevVal = noeud;
-                    break;
-
-                default:
-                    ErreurSynt("Type de terminal inconnu : " + noeud);
-
+            if (profondeurRacine != 0) {
+                ErreurSynt("Parenthèses non équilibrées");
             }
         }
+        catch (IllegalArgumentException e) {
+            ErreurSynt(e.getMessage());
+        }
 
-        return (racine == null) ? prevVal : racine;
+        return racine;
     }
 
     /**
@@ -93,7 +89,7 @@ public class DescenteRecursive {
 
             ElemAST RacineAST = dr.AnalSynt();
 
-            toWriteLect += "Lecture de l'AST trouve : " + RacineAST.toString() + "\n";
+            toWriteLect += "Lecture de l'AST trouve : " + "\n" + RacineAST.toString();
             System.out.println(toWriteLect);
 
             toWriteEval += "Evaluation de l'AST trouve : " + RacineAST.EvalAST() + "\n";

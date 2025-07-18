@@ -29,14 +29,14 @@ public class NoeudAST extends ElemAST {
                     ErreurEvalAST("Opérateur sans opérandes");
                 }
                 return switch (terminal.toString()) {
-                    case PLUS ->            gauche.EvalAST() + droite.EvalAST();
-                    case MOINS ->           gauche.EvalAST() - droite.EvalAST();
-                    case MULTIPLICATION ->  gauche.EvalAST() * droite.EvalAST();
+                    case PLUS ->            getGauche().EvalAST() + getDroite().EvalAST();
+                    case MOINS ->           getGauche().EvalAST() - getDroite().EvalAST();
+                    case MULTIPLICATION ->  getGauche().EvalAST() * getDroite().EvalAST();
                     case DIVISION -> {
-                        if (droite.EvalAST() == 0) {
+                        if (getDroite().EvalAST() == 0) {
                             ErreurEvalAST("Division par zéro");
                         }
-                        yield gauche.EvalAST() / droite.EvalAST();
+                        yield getGauche().EvalAST() / getDroite().EvalAST();
                     }
                     default -> {
                         ErreurEvalAST("Opérateur inconnu : " + terminal);
@@ -65,13 +65,9 @@ public class NoeudAST extends ElemAST {
      */
     @Override
     public String toString() {
-        return terminal.toString() + "\n" +
-                (gauche != null ? "Gauche: " + gauche.toString() + "\n" : "") +
-                (droite != null ? "Droite: " + droite.toString() + "\n" : "");
-    }
-
-    private Boolean estFeuille() {
-        return gauche == null && droite == null;
+        return  (this.getGauche() != null ? this.getGauche().toString() : "") +
+                this.getStringProfondeur() + terminal.toString() + "\n" +
+                (this.getDroite() != null ? this.getDroite().toString() : "");
     }
 }
 
