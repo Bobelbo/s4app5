@@ -43,7 +43,7 @@ public class DescenteRecursive {
                     refRacinesParenthese.add(profondeurRacine, new SyntaxTreeBuilder());
                 } else if (terminal.type == PARENTHESE_FERMANTE) {
                     profondeurRacine--;
-                    racine = refRacinesParenthese.get(profondeurRacine).buildTree(racine);
+                    racine = refRacinesParenthese.get(profondeurRacine).buildTree(racine, true);
                 } else {
                     racine = refRacinesParenthese.get(profondeurRacine).buildTree(new NoeudAST(terminal));
                 }

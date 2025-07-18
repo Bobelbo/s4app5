@@ -47,7 +47,7 @@ public class NoeudAST extends ElemAST {
                 return Integer.parseInt(terminal.toString());
 
             case VARIABLE:
-                return 0; // Pour l'instant, on ne gère pas les variables
+                ErreurEvalAST("Impossible d'évaluer une variable"); // Pour l'instant, on ne gère pas les variables
 
             default:
                 ErreurEvalAST("Type de terminal inconnu : " + terminal);

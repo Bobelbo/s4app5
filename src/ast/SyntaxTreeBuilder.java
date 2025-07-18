@@ -36,4 +36,22 @@ public class SyntaxTreeBuilder {
 
         return (racine == null) ? prevVal : racine;
     }
+
+    /**
+     * This override is used when an operator tree needs to be treated as a variable.
+     * @param node
+     * @param override
+     * @return
+     */
+    public ElemAST buildTree(ElemAST node, Boolean override) {
+        if (override) {
+            if (racine != null) {
+                prevOper.setDroite(node); // Ajout du noeud comme sous-arbre droit de l'opérateur précédent
+            }
+            prevVal = node;
+        } else {
+            racine = buildTree(node); // Appel de la méthode normale pour construire l'arbre
+        }
+        return racine;
+    }
 }
