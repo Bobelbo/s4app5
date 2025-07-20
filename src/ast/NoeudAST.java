@@ -65,9 +65,9 @@ public class NoeudAST extends ElemAST {
      */
     @Override
     public String toString() {
-        return  (this.getGauche() != null ? this.getGauche().toString() : "") +
+        return  (this.getDroite() != null ? this.getDroite().toString() : "") +
                 this.getStringProfondeur() + terminal.toString() + "\n" +
-                (this.getDroite() != null ? this.getDroite().toString() : "");
+                (this.getGauche() != null ? this.getGauche().toString() : "");
     }
 }
 
