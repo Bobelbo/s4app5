@@ -63,6 +63,12 @@ public class DescenteRecursive {
             toWriteLect += "Lecture de l'AST trouve : " + "\n" + RacineAST.toString();
             System.out.println(toWriteLect);
 
+            toWriteLect += "\nAffichage de l'AST en postfixe : " + RacineAST.PrintPostfixe() + "\n";
+            System.out.println("Affichage de l'AST en postfixe : " + RacineAST.PrintPostfixe());
+
+            toWriteLect += "\nAffichage de l'AST en notation normal : " + RacineAST.PrintAST() + "\n";
+            System.out.println("Affichage de l'AST en notation normal : " + RacineAST.PrintAST());
+
             toWriteEval += "Evaluation de l'AST trouve : " + RacineAST.EvalAST() + "\n";
             System.out.println(toWriteEval);
 

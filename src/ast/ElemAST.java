@@ -75,4 +75,27 @@ public abstract class ElemAST {
     protected String getStringProfondeur() {
         return "=".repeat(Math.max(0, profondeur()));
     }
+
+    public String PrintPostfixe() {
+        StringBuilder sb = new StringBuilder();
+        if (getGauche() != null) {
+            sb.append(getGauche().PrintPostfixe()).append(" ");
+        }
+        if (getDroite() != null) {
+            sb.append(getDroite().PrintPostfixe()).append(" ");
+        }
+        sb.append(terminal.toString());
+        return sb.toString();
+    }
+
+    public String PrintAST() {
+        if (estFeuille())
+            return terminal.toString();
+
+        return  '(' +
+                getGauche().PrintAST() +
+                terminal.toString() +
+                getDroite().PrintAST() +
+                ')';
+    }
 }
