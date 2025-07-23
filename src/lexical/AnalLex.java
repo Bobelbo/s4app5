@@ -9,8 +9,6 @@ import static app6.src.lexical.Operateurs.OPERATEURS;
  * Cette classe effectue l'analyse lexicale
  */
 public class AnalLex {
-
-    // Attributs
     private String formule;
 
     /**
@@ -20,7 +18,6 @@ public class AnalLex {
         this.formule = formule.replace(" ", "");                           // Initialisation de l'attribut formule
     }
 
-
     /**
      * resteTerminal() retourne :
      * false si tous les terminaux de l'expression arithmétique ont été retournés
@@ -29,7 +26,6 @@ public class AnalLex {
     public boolean resteTerminal() {
         return !formule.isEmpty();
     }
-
 
     /**
      * prochainTerminal() retourne le prochain terminal
@@ -62,7 +58,6 @@ public class AnalLex {
         return new Terminal(acc.toString()); // Retourne le terminal trouvé
     }
 
-
     /**
      * ErreurLex() envoie un message d'erreur lexicale
      */
@@ -70,7 +65,6 @@ public class AnalLex {
         System.out.println("Erreur lexicale : " + s);
         System.exit(1); // Arrêt du programme en cas d'erreur lexicale
     }
-
 
     // Méthode principale à lancer pour tester l'analyseur lexical
     public static void main(String[] args) {

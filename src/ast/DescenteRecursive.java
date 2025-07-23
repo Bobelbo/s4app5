@@ -28,36 +28,7 @@ public class DescenteRecursive {
      * Elle retourne une référence sur la racine de l'AST construit
      */
     public ElemAST AnalSynt() {
-        ElemAST racine = null; // Racine de l'AST
-        List<SyntaxTreeBuilder> refRacinesParenthese = new ArrayList<>();
-        // 0 est le root builder
-        refRacinesParenthese.add(new SyntaxTreeBuilder());
-        int profondeurRacine = 0;
-
-        try {
-            while (this.analexical.resteTerminal()) {
-                Terminal terminal = this.analexical.prochainTerminal(); // Récupération du prochain terminal
-
-                if (terminal.type == PARENTHESE_OUVRANTE) {
-                    profondeurRacine++;
-                    refRacinesParenthese.add(profondeurRacine, new SyntaxTreeBuilder());
-                } else if (terminal.type == PARENTHESE_FERMANTE) {
-                    profondeurRacine--;
-                    racine = refRacinesParenthese.get(profondeurRacine).buildTree(racine, true);
-                } else {
-                    racine = refRacinesParenthese.get(profondeurRacine).buildTree(new NoeudAST(terminal));
-                }
-            } // End of while
-
-            if (profondeurRacine != 0) {
-                ErreurSynt("Parenthèses non équilibrées");
-            }
-        }
-        catch (IllegalArgumentException e) {
-            ErreurSynt(e.getMessage());
-        }
-
-        return racine;
+        return new RecursiveDescentParser(this.analexical).parse();
     }
 
     /**

@@ -38,13 +38,11 @@ public class Terminal {
                 break;
 
             default:
-                if (chaine.matches("\\d+")) { // Vérifie si c'est un nombre
-                    this.type = TerminalType.NOMBRE;
-                } else if (chaine.matches("^[A-Z]([A-Za-z]|_(?!_|$))*$")) { // Vérifie si c'est une variable
-                    this.type = TerminalType.VARIABLE;
+                if (chaine.matches("^[0-9]+$") ||
+                    chaine.matches("^[A-Z]([A-Za-z]|_(?!_|$))*$")) { // Vérifie si c'est un nombre
+                    this.type = TerminalType.OPERANDE; // C'est un nombre ou une variable
                 } else {
-                    System.out.println("Terminal inconnu: " + chaine);
-                    throw new IllegalArgumentException("Terminal inconnu: " + chaine);
+                    throw new IllegalArgumentException("Terminal Invalide Format non supporté : " + chaine);
                 }
                 break;
         }
